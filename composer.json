@@ -1,0 +1,19 @@
+{
+  "name": "bomcms/medialak",
+  "description": "Get link youtube, google drive and vimeo",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nguyễn Tuấn Siêu",
+      "email": "info@camxuyen.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "2.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "BomCMS\\MediaLak\\": ""
+    }
+  }
+}
