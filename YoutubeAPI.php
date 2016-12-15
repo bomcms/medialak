@@ -39,16 +39,28 @@ class YoutubeAPI
                 'title' => $data['title'],
                 'keywords' => $data['keywords'],
                 'token' => $data['token'],
-                'view_count' => $data['view_count']
+                'view_count' => $data['view_count'],
             ];
             $aries = explode(',', $data['url_encoded_fmt_stream_map']);
             foreach ($aries as $ary) {
                 parse_str($ary, $links[]);
             }
+
+            $videos = [];
+            foreach ($links as $link) {
+                $video = [
+                    'file' => $link['url']
+                ];
+                $videos[] = json_encode($video);
+            }
+            $result['videos']['sources'] = serialize($videos);
         }
 
-
-        echo '<pre>';
-        print_r($links);
+//[{
+//   file: "//content.jwplatform.com/videos/C4lp6Dtd-640.mp4"
+//},{
+//   file: "//content.jwplatform.com/videos/C4lp6Dtd-1280.mp4"
+//}]
+        return $result;
     }
 }
