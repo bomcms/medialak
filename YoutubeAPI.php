@@ -51,16 +51,10 @@ class YoutubeAPI
                 $video = [
                     'file' => $link['url']
                 ];
-                $videos[] = json_encode($video);
+                $videos[] = $video;
             }
-            $result['videos']['sources'] = serialize($videos);
+            $result['videos']['sources'] = json_encode($videos);
         }
-
-//[{
-//   file: "//content.jwplatform.com/videos/C4lp6Dtd-640.mp4"
-//},{
-//   file: "//content.jwplatform.com/videos/C4lp6Dtd-1280.mp4"
-//}]
         return $result;
     }
 }
