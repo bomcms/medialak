@@ -28,15 +28,27 @@ class YoutubeAPI
         $client = new Client([
             'base_uri' => 'http://www.youtube.com'
         ]);
-        $data = $client->request('GET', 'get_video_info', [
+        $response = $client->request('GET', 'get_video_info', [
             'query' => [
                 'video_id' => $id
             ],
         ]);
-        $video = parse_str($data->getBody()->getContents(), $videos);
+        parse_str($response->getBody()->getContents(), $data);
+        if(isset($data['url_encoded_fmt_stream_map'])) {
+            $result = [
+                'title' => $data['title'],
+                'keywords' => $data['keywords'],
+                'token' => $data['token'],
+                'view_count' => $data['view_count']
+            ];
+            $aries = explode(',', $data['url_encoded_fmt_stream_map']);
+            foreach ($aries as $ary) {
+                parse_str($ary, $links[]);
+            }
+        }
 
 
         echo '<pre>';
-        print_r($videos);
+        print_r($links);
     }
 }
